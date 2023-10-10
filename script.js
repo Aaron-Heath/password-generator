@@ -25,6 +25,8 @@ var validateNumber = function(string) {
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+const LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
+
 // Write password to the #password input
 function writePassword() {
   var pwdLength = validateNumber(prompt("Enter the password length:\nMin: 8, Max: 128", 8));
@@ -46,15 +48,27 @@ function writePassword() {
     return null;
   }
 
-  var includeLower = window.confirm("Click okay to use lowercase characters");
-  var includeUpper = window.confirm("Upper");
+  var includeLower = window.confirm("Click okay to use lowercase characters.");
+  var includeUpper = window.confirm("Click okay to use uppercase characters.");
+  var includeNumber = window.confirm("Click okay to use numberic characters.");
+  var includeSpecial = window.confirm("Click okay to use special characters.");
 
-  // var characterPool = [];
+  var characterPool = [];
 
-  // if(includeLower) {
-  //   const lower = []
-  //   characterPool=characterPool.concat(lower);
-  // }
+  if(includeLower) {
+    characterPool=characterPool.concat(LETTERS);
+  }
+  if(includeUpper) {
+    characterPool=characterPool.concat(LETTERS.toUpperCase());
+  }
+  if(includeNumber) {
+    const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
+    characterPool=characterPool,concat(NUMBERS);
+  }
+  if(includeSpecial) {
+    const specialCharacters = ["!@#$%^&*()'/?><+=".split("")];
+    characterPool = characterPool.concat(specialCharacters);
+  }
 
 
 
