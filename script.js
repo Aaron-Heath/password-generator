@@ -33,11 +33,13 @@ const LETTERS = "abcdefghijklmnopqrstuvwxyz"
 function writePassword() {
   var pwdLength = validateNumber(prompt("Enter the password length:\nMin: 8, Max: 128", 8));
   
+  // If validateNumber returns false, alert invalid entry.
   if(!pwdLength) {
-    console.log(pwdLength)
-    return; 
+    console.log(pwdLength);
+    alert("Invalid entry. Try again.");
+    return;
   }
-  
+    // If user hits cancel, return without alert.
   if (pwdLength === null) {
     return;
   }
@@ -45,31 +47,41 @@ function writePassword() {
 
   // Returns if  user does not enter a NUMBER between 8 and 128
   if (pwdLength < 8 || pwdLength > 128 || Number.isNaN(pwdLength)) {
-    alert("Try again");
-    console.log(pwdLength);
-    return null;
+    alert("Invalid entry. Try again.");
+    return;
   }
 
-  var includeLower = window.confirm("Click okay to use lowercase characters.");
-  var includeUpper = window.confirm("Click okay to use uppercase characters.");
-  var includeNumber = window.confirm("Click okay to use numeric characters.");
-  var includeSpecial = window.confirm("Click okay to use special characters.");
+  var includeLower = window.confirm("Click Ok to use lowercase characters.");
+  var includeUpper = window.confirm("Click Ok to use uppercase characters.");
+  var includeNumber = window.confirm("Click Ok to use numeric characters.");
+  var includeSpecial = window.confirm("Click Ok to use special characters.");
 
   var characterPool = [];
+  // Set counter to validate any criteria were chosen.
+  criteria = 0;
 
   if(includeLower) {
     characterPool = characterPool.concat(LETTERS.split(""));
+    criteria ++;
   }
   if(includeUpper) {
     characterPool = characterPool.concat(LETTERS.toUpperCase().split(""));
+    criteria ++;
   }
   if(includeNumber) {
     const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
     characterPool = characterPool.concat(NUMBERS);
+    criteria ++;
   }
   if(includeSpecial) {
     const specialCharacters = "!@#$%^&*()'/?><+=".split("");
     characterPool = characterPool.concat(specialCharacters);
+    criteria ++;
+  }
+
+  if (criteria <= 0) {
+    alert("No password criteria chosen. Please try again.");
+    return;
   }
 
 
