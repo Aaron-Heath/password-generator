@@ -1,9 +1,11 @@
 var generatePassword = function(characterPool, pwdLength) {
   // Your generate password function goes here.
+  console.log(characterPool);
   var password= "";
   for(let i = 0; i < pwdLength; i ++) {
-    
+    password += characterPool[Math.floor(Math.random()* characterPool.length)];
   }
+  return password;
 }
 
 // Returns Number if all digits of the String are numeric. Else returns false.
@@ -25,7 +27,7 @@ var validateNumber = function(string) {
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-const LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
+const LETTERS = "abcdefghijklmnopqrstuvwxyz"
 
 // Write password to the #password input
 function writePassword() {
@@ -50,29 +52,29 @@ function writePassword() {
 
   var includeLower = window.confirm("Click okay to use lowercase characters.");
   var includeUpper = window.confirm("Click okay to use uppercase characters.");
-  var includeNumber = window.confirm("Click okay to use numberic characters.");
+  var includeNumber = window.confirm("Click okay to use numeric characters.");
   var includeSpecial = window.confirm("Click okay to use special characters.");
 
   var characterPool = [];
 
   if(includeLower) {
-    characterPool=characterPool.concat(LETTERS);
+    characterPool = characterPool.concat(LETTERS.split(""));
   }
   if(includeUpper) {
-    characterPool=characterPool.concat(LETTERS.toUpperCase());
+    characterPool = characterPool.concat(LETTERS.toUpperCase().split(""));
   }
   if(includeNumber) {
     const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
-    characterPool=characterPool,concat(NUMBERS);
+    characterPool = characterPool.concat(NUMBERS);
   }
   if(includeSpecial) {
-    const specialCharacters = ["!@#$%^&*()'/?><+=".split("")];
+    const specialCharacters = "!@#$%^&*()'/?><+=".split("");
     characterPool = characterPool.concat(specialCharacters);
   }
 
 
 
-  var password = generatePassword();
+  var password = generatePassword(characterPool, pwdLength);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -81,20 +83,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
-// Prompt user for password length
-// Verify Password length
-// Confirm lower case
-// Confirm upper case
-// Confirm numeric characters
-// Confirm special characters
-
-// Implement generatePassword() using those parameters
-  // if lowerCase
-  // if upperCase
-  // if numeric
-  // specialCharacters
-  // return password
